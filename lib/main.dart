@@ -6,9 +6,28 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Color(0xFF20214F),
+        hintColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(color: Color(0xFF20214F)),
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xFF20214F),
+          titleTextStyle: TextStyle(color: Colors.white),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xFF20214F)),
+          ),
+          labelStyle: TextStyle(color: Color(0xFF20214F)),
+        ),
+      ),
       home: WeatherScreen(),
     );
   }
@@ -16,6 +35,7 @@ class MyApp extends StatelessWidget {
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
+
   @override
   WeatherScreenState createState() => WeatherScreenState();
 }
@@ -26,13 +46,13 @@ class WeatherScreenState extends State<WeatherScreen> {
   String temperature = '';
   String weather = '';
 
-void fetchWeather() {
-  setState(() {
-    cityName = cityController.text;
-    temperature = '${(15 + (30 - 15) * (DateTime.now().millisecondsSinceEpoch % 100) / 100).toStringAsFixed(1)}°C';
-    weather = ['Sunny', 'Cloudy', 'Rainy'][(DateTime.now().millisecondsSinceEpoch % 3)];
-  });
-}
+  void fetchWeather() {
+    setState(() {
+      cityName = cityController.text;
+      temperature = '${(15 + (30 - 15) * (DateTime.now().millisecondsSinceEpoch % 100) / 100).toStringAsFixed(1)}°C';
+      weather = ['Sunny', 'Cloudy', 'Rainy'][(DateTime.now().millisecondsSinceEpoch % 3)];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +68,10 @@ void fetchWeather() {
             ),
             SizedBox(height: 10),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(Color(0xFF20214F)),
+                foregroundColor: WidgetStateProperty.all(Colors.white),
+              ),
               onPressed: fetchWeather,
               child: Text('Fetch Weather'),
             ),
