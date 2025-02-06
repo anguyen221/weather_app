@@ -26,9 +26,13 @@ class WeatherScreenState extends State<WeatherScreen> {
   String temperature = '';
   String weather = '';
 
-  void fetchWeather(){
-
-  }
+void fetchWeather() {
+  setState(() {
+    cityName = cityController.text;
+    temperature = '${(15 + (30 - 15) * (DateTime.now().millisecondsSinceEpoch % 100) / 100).toStringAsFixed(1)}°C';
+    weather = ['Sunny', 'Cloudy', 'Rainy'][(DateTime.now().millisecondsSinceEpoch % 3)];
+  });
+}
 
   @override
   Widget build(BuildContext context) {
