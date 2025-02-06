@@ -21,6 +21,15 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class WeatherScreenState extends State<WeatherScreen> {
+  final TextEditingController cityController = TextEditingController();
+  String cityName = '';
+  String temperature = '';
+  String weather = '';
+
+  void fetchWeather(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +38,19 @@ class WeatherScreenState extends State<WeatherScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            TextField(
+              controller: cityController,
+              decoration: InputDecoration(labelText: 'Enter City Name'),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: fetchWeather,
+              child: Text('Fetch Weather'),
+            ),
+            SizedBox(height: 20),
+            Text('City: $cityName'),
+            Text('Temperature: $temperature'),
+            Text('Weather: $weather'),
           ],
         ),
       ),
